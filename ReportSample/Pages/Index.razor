@@ -1,0 +1,41 @@
+﻿@using Telerik.ReportViewer.Blazor
+@page "/"
+<style>
+    #rv1 {
+        position: relative;
+        width: 1200px;
+        height: 600px;
+    }
+</style>
+
+<ReportViewer ViewerId="rv1"
+              ServiceUrl="/api/reports"
+              ReportSource="@(new ReportSourceOptions()
+                          {
+                              Report = "Report2.trdp",
+
+                              Parameters = new Dictionary<string, object>
+                              {
+                                { "Parameter1" , reprot1s},
+                              }
+                          })"
+              Parameters="@(new ParametersOptions { Editors = new EditorsOptions { MultiSelect = EditorType.ComboBox, SingleSelect = EditorType.ComboBox } })"
+              ScaleMode="@(ScaleMode.Specific)"
+              Scale="1.0" />
+
+@code {
+    protected List<AppCore.ReportModels.Reprot1> reprot1s { get; set; } = new List<AppCore.ReportModels.Reprot1>();
+    protected override void OnParametersSet()
+    {
+        reprot1s.Add(new AppCore.ReportModels.Reprot1
+            {
+                Report1 = "1",
+                Report2 = "2",
+            });
+        reprot1s.Add(new AppCore.ReportModels.Reprot1
+            {
+                Report1 = "3",
+                Report2 = "4",
+            });
+    }
+}

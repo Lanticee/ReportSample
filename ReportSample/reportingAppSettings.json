@@ -1,0 +1,9 @@
+{
+  "ConnectionStrings": [
+    {
+      "name": "ReportConnection1",
+      "connectionString": "Data Source=localhost;Initial Catalog=AppCore;Persist Security Info=True;User ID=test;Password=test;Min Pool Size=25; Max Pool Size=300;MultipleActiveResultSets=true;TrustServerCertificate=true;",
+      "providerName": "System.Data.SqlClient"
+    }
+  ]
+}

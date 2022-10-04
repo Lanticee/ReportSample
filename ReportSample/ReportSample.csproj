@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="16.2.22.914" />
+		<PackageReference Include="Telerik.ReportViewer.Blazor" Version="16.2.22.914" />
+	</ItemGroup>
+</Project>
