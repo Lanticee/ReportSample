@@ -14,7 +14,7 @@ namespace ReportSample
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages().AddNewtonsoftJson();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddControllers().AddNewtonsoftJson(o =>
@@ -24,7 +24,7 @@ namespace ReportSample
             builder.Services.TryAddSingleton<IReportDesignerServiceConfiguration>(sp => new ReportDesignerServiceConfiguration
             {
                 DefinitionStorage = new FileDefinitionStorage(
-                 System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports")),
+                 System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().ContentRootPath, "Reports")),
                 SettingsStorage = new FileSettingsStorage(
                   Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Telerik Reporting"))
             });
@@ -36,9 +36,9 @@ namespace ReportSample
                             Storage = new Telerik.Reporting.Cache.File.FileStorage(),
                             //ReportSourceResolver = new CustomReportResolver(),
                             ReportSourceResolver = new UriReportSourceResolver(
-                                System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports"))
+                                System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().ContentRootPath, "Reports"))
                         });
-            builder.Services.TryAddScoped<IDefinitionStorage>(sp => new FileDefinitionStorage(Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports")));
+            builder.Services.TryAddScoped<IDefinitionStorage>(sp => new FileDefinitionStorage(Path.Combine(sp.GetService<IWebHostEnvironment>().ContentRootPath, "Reports")));
             builder.Services.TryAddScoped<IReportDesignerServiceConfiguration>(sp => new ReportDesignerServiceConfiguration { DefinitionStorage = sp.GetRequiredService<IDefinitionStorage>() });
             var app = builder.Build();
 

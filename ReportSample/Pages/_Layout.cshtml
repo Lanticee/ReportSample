@@ -20,7 +20,8 @@
     <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
     <script src="api/reportdesigner/resources/js/telerikReportViewer"></script>
     <script src="api/reportdesigner/designerresources/js/webReportDesigner"></script>
-  
+
+
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
@@ -37,18 +38,10 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.server.js"></script>
-    <script src="_content/Telerik.ReportViewer.Blazor/interop.js" defer></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#webReportDesigner").telerik_WebReportDesigner({
-                persistSession: false,
-                toolboxArea: {
-                    layout: "list"
-                },
-                serviceUrl: "api/reportdesigner/",
-                report: "report2.trdp"
-            }).data("telerik_WebDesigner");
-        });
-    </script>
+
+
+    <script src="_content/telerik.webreportdesigner.blazor/telerikWebReportDesignerInterop.js" defer></script>
+   @* <script src="_content/Telerik.ReportViewer.Blazor/interop.js" defer></script>*@
+    
 </body>
 </html>

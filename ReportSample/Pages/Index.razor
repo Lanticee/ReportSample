@@ -1,10 +1,21 @@
 ﻿@using Telerik.ReportViewer.Blazor
+@using Telerik.WebReportDesigner.Blazor
 @page "/"
 
 
-<div id="webReportDesigner">
-    loading...
-</div>
+<style>
+    #wrd1 {
+        position: relative;
+        width: 1300px;
+        height: 880px;
+        padding-right: 50px;
+    }
+</style>
+<WebReportDesigner DesignerId="wrd1"
+            ServiceUrl="/api/reportdesigner"
+            Report="Report2.trdp"
+            ToolboxArea="new ToolboxAreaOptions() { Layout = ToolboxAreaLayout.List }"
+            PropertiesArea="new PropertiesAreaOptions() { Layout = PropertiesAreaLayout.Categorized }" />
 
 
 @code {
