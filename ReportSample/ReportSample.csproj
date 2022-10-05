@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,7 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="16.2.22.914" />
-		<PackageReference Include="Telerik.ReportViewer.Blazor" Version="16.2.22.914" />
+		<PackageReference Include="Telerik.Reporting.Services.AspNetCore" Version="15.2.21.915" />
+		<PackageReference Include="Telerik.ReportViewer.Blazor" Version="15.2.21.915" />
+		<PackageReference Include="Telerik.WebReportDesigner.Services" Version="15.2.21.915" />
+		<PackageReference Include="Telerik.Reporting.WebServiceDataSource" Version="15.2.21.915" />
+
 	</ItemGroup>
 </Project>

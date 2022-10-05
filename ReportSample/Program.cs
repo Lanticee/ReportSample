@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using ReportSample.Data;
 using Telerik.Reporting.Services;
+using Telerik.WebReportDesigner.Services;
 
 namespace ReportSample
 {
@@ -20,17 +21,25 @@ namespace ReportSample
             {
                 o.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-            builder.Services.AddScoped<IReportSourceResolver, CustomReportResolver>();
+            builder.Services.TryAddSingleton<IReportDesignerServiceConfiguration>(sp => new ReportDesignerServiceConfiguration
+            {
+                DefinitionStorage = new FileDefinitionStorage(
+                 System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports")),
+                SettingsStorage = new FileSettingsStorage(
+                  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Telerik Reporting"))
+            });
             builder.Services.TryAddSingleton<IReportServiceConfiguration>(sp =>
                         new ReportServiceConfiguration
                         {
                             ReportingEngineConfiguration = ConfigurationHelper.ResolveConfiguration(sp.GetService<IWebHostEnvironment>()),
                             HostAppId = "AppCore.Web",
                             Storage = new Telerik.Reporting.Cache.File.FileStorage(),
-                            ReportSourceResolver = new CustomReportResolver(),
-                            //ReportSourceResolver = new UriReportSourceResolver(
-                            //    System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports"))
+                            //ReportSourceResolver = new CustomReportResolver(),
+                            ReportSourceResolver = new UriReportSourceResolver(
+                                System.IO.Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports"))
                         });
+            builder.Services.TryAddScoped<IDefinitionStorage>(sp => new FileDefinitionStorage(Path.Combine(sp.GetService<IWebHostEnvironment>().WebRootPath, "reports")));
+            builder.Services.TryAddScoped<IReportDesignerServiceConfiguration>(sp => new ReportDesignerServiceConfiguration { DefinitionStorage = sp.GetRequiredService<IDefinitionStorage>() });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

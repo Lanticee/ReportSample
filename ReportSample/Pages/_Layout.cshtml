@@ -16,7 +16,10 @@
     <link href="https://kendo.cdn.telerik.com/2022.1.301/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="https://kendo.cdn.telerik.com/2022.1.301/styles/kendo.blueopal.min.css" rel="stylesheet" />
 
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src="api/reportdesigner/resources/js/telerikReportViewer"></script>
+    <script src="api/reportdesigner/designerresources/js/webReportDesigner"></script>
   
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
@@ -33,10 +36,19 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/api/reports/resources/js/telerikReportViewer"> </script>
-
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/Telerik.ReportViewer.Blazor/interop.js" defer></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#webReportDesigner").telerik_WebReportDesigner({
+                persistSession: false,
+                toolboxArea: {
+                    layout: "list"
+                },
+                serviceUrl: "api/reportdesigner/",
+                report: "report2.trdp"
+            }).data("telerik_WebDesigner");
+        });
+    </script>
 </body>
 </html>
